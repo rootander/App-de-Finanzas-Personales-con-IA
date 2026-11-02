@@ -8,7 +8,7 @@ export async function seleccionarImagen() {
   }
 
   const resultado = await ImagePicker.launchImageLibraryAsync({
-    mediaTypes: ImagePicker.MediaTypeOptions.Images,
+    mediaTypes: ['images'],
     base64: true,
     quality: 0.7,
   })
@@ -24,7 +24,7 @@ export async function tomarFoto() {
   }
 
   const resultado = await ImagePicker.launchCameraAsync({
-    mediaTypes: ImagePicker.MediaTypeOptions.Images,
+    mediaTypes: ['images'],
     base64: true,
     quality: 0.7,
   })
@@ -58,7 +58,7 @@ export async function clasificarDescripcion(descripcion: string, tipo: 'ingreso'
     supabase.from('metrica_ia').insert({
       usuario_id: user.id,
       proceso: 'clasificacion',
-      modelo: 'Llama 3.3 70B',
+      modelo: 'GPT-OSS 120B',
       duracion_ms,
       tokens_input: tokensInput,
       tokens_output: tokensOutput,
@@ -126,7 +126,7 @@ export async function procesarImagenConIA(imagen_base64: string, descripcion_usu
     supabase.from("metrica_ia").insert({
       usuario_id: user.id,
       proceso: "ocr",
-      modelo: "Llama 4 Scout",  // modelo real de Groq
+      modelo: "Qwen 3.8 27B",  // modelo real de Groq
       duracion_ms,
       tokens_input: tokensInput,
       tokens_output: tokensOutput,
@@ -152,7 +152,7 @@ export async function procesarImagenConIA(imagen_base64: string, descripcion_usu
         emisor: data.emisor || null,
         recomendaciones: Array.isArray(data.recomendaciones) ? data.recomendaciones.join(' | ') : (data.recomendaciones || null),
         texto_completo_ocr: JSON.stringify(data),
-        modelo_ia: "llama-4-scout",
+        modelo_ia: "qwen3.8-27b",
         proveedor_ia: "groq",
         duracion_ms,
         exito: true,
@@ -183,7 +183,7 @@ export async function procesarImagenConIA(imagen_base64: string, descripcion_usu
         emisor: null,
         recomendaciones: null,
         texto_completo_ocr: null,
-        modelo_ia: "llama-4-scout",
+        modelo_ia: "qwen3.8-27b",
         proveedor_ia: "groq",
         duracion_ms,
         exito: false,

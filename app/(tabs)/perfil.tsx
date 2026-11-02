@@ -492,7 +492,7 @@ export default function Perfil() {
             </View>
             <View style={{ flex: 1 }}>
               <Text style={s.menuLabel}>OCR de comprobantes</Text>
-              <Text style={s.menuSub}>Llama 4 Scout · Groq Cloud</Text>
+              <Text style={s.menuSub}>Qwen 3.8 27B · Groq Cloud</Text>
             </View>
             <View style={s.iaBadge}>
               <Text style={s.iaBadgeTxt}>Activo</Text>
@@ -505,7 +505,7 @@ export default function Perfil() {
             </View>
             <View style={{ flex: 1 }}>
               <Text style={s.menuLabel}>Asesor financiero IA</Text>
-              <Text style={s.menuSub}>Llama 3.3 70B · Groq Cloud</Text>
+              <Text style={s.menuSub}>GPT-OSS 120B · Groq Cloud</Text>
             </View>
             <View style={s.iaBadge}>
               <Text style={s.iaBadgeTxt}>Activo</Text>

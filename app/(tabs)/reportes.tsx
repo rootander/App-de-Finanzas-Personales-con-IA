@@ -715,7 +715,7 @@ ESTRATEGIA DE AHORRO PERSONALIZADA:
 - Ejemplo: "Con tu ingreso de S/ 2000, tu meta de ahorro es S/ 400/mes. Si reduces Restaurante de S/ 85 a S/ 45 y Transporte de S/ 45 a S/ 25, ahorraras S/ 60/mes extras."`;
 
       const controller = new AbortController();
-      const timeoutId = setTimeout(() => controller.abort(), 8000);
+      const timeoutId = setTimeout(() => controller.abort(), 30000);
       let groqResponse: any;
 
       try {
@@ -727,7 +727,8 @@ ESTRATEGIA DE AHORRO PERSONALIZADA:
             'Content-Type': 'application/json',
           },
           body: JSON.stringify({
-            model: 'llama-3.3-70b-versatile',
+            model: 'openai/gpt-oss-120b',
+            reasoning_effort: 'low',
             messages: [
               { role: 'system', content: systemPrompt },
               { role: 'user', content: originalMsg }
@@ -760,7 +761,7 @@ ESTRATEGIA DE AHORRO PERSONALIZADA:
 
       // Registrar métrica de éxito
       Analytics.chatMensaje(originalMsg, duracion_ms);
-      Analytics.chatIntentMatch("Llama 3.3 70B", duracion_ms, tokensInput, tokensOutput);
+      Analytics.chatIntentMatch("GPT-OSS 120B", duracion_ms, tokensInput, tokensOutput);
 
       // Guardar historial del chat en chat_historial (fire-and-forget)
       supabase.auth.getUser().then(({ data: { user } }) => {
@@ -772,7 +773,7 @@ ESTRATEGIA DE AHORRO PERSONALIZADA:
           sesion_id: sesionId,
           mensaje_usuario: originalMsg,
           respuesta_ia: res,
-          modelo_ia: "llama-3.3-70b-versatile",
+          modelo_ia: "openai/gpt-oss-120b",
           proveedor_ia: "groq",
           intencion_detectada: "consulta_financiera",
           tokens_input: tokensInput,
@@ -811,7 +812,7 @@ ESTRATEGIA DE AHORRO PERSONALIZADA:
           sesion_id: sesionId,
           mensaje_usuario: originalMsg,
           respuesta_ia: err?.message?.slice(0, 500) || "Error desconocido",
-          modelo_ia: "llama-3.3-70b-versatile",
+          modelo_ia: "openai/gpt-oss-120b",
           proveedor_ia: "groq",
           intencion_detectada: null,
           tokens_input: null,

@@ -99,11 +99,12 @@ Deno.serve(async (req) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'llama-3.3-70b-versatile',
+        model: 'openai/gpt-oss-20b',
+        reasoning_effort: 'low',
         messages: [
           {
             role: 'system',
-            content: 'Eres un clasificador de movimientos financieros personales. Respondes únicamente con JSON válido, sin markdown ni explicaciones.',
+            content: 'Eres un clasificador de movimientos financieros personales. Respondes ÚNICAMENTE con JSON válido, sin markdown, sin razonamiento, sin explicaciones.',
           },
           {
             role: 'user',
@@ -119,13 +120,14 @@ Reglas:
 - Elige la categoría más específica que corresponda.
 - Si no hay certeza, usa "Otros gastos" o "Otros ingresos" según el tipo.
 - Devuelve una confianza entre 0 y 1.
+- Responde SOLO el objeto JSON, nada más.
 
-Responde solo con este JSON:
+Formato exacto:
 {"categoria_sugerida":"nombre exacto de la categoría","tipo":"${tipo}","confianza":0.9,"razon":"breve"}`,
           },
         ],
-        max_tokens: 160,
-        temperature: 0.05,
+        max_tokens: 300,
+        temperature: 0,
         response_format: { type: 'json_object' },
       }),
     })
@@ -156,7 +158,7 @@ Responde solo con este JSON:
       tipo,
       confianza: Number(resultado?.confianza) || 0,
       razon: String(resultado?.razon || ''),
-      modelo: 'llama-3.3-70b-versatile',
+      modelo: 'openai/gpt-oss-20b',
     })
   } catch (error) {
     console.error('ERROR CRÍTICO:', error)

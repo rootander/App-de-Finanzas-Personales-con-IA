@@ -184,8 +184,8 @@ export const Analytics = {
 
   ocrIniciado: () =>   track("OCR_STARTED"),
   ocrExitoso:  (monto?: number, categoria_sugerida?: string, duracion_ms?: number) =>
-    track("OCR_SUCCESS", { monto, categoria_sugerida, modelo: "Llama 4 Scout" }, undefined, duracion_ms),
-  ocrError:    (mensaje: string, duracion_ms?: number) => track("OCR_ERROR",     { mensaje, modelo: "Llama 4 Scout" }, undefined, duracion_ms),
+    track("OCR_SUCCESS", { monto, categoria_sugerida, modelo: "Qwen 3.8 27B" }, undefined, duracion_ms),
+  ocrError:    (mensaje: string, duracion_ms?: number) => track("OCR_ERROR",     { mensaje, modelo: "Qwen 3.8 27B" }, undefined, duracion_ms),
   ocrConfirmado: (monto?: number, categoria?: string) =>
     track("OCR_CONFIRMED", { monto, categoria }),
   ocrCancelado: () => track("OCR_CANCELLED"),
@@ -198,13 +198,13 @@ export const Analytics = {
     track("CHAT_MESSAGE_SENT", { texto: texto.slice(0, 120) }, undefined, duracion_ms),
 
   chatIntentMatch: (modelo: string, duracion_ms: number, tokens_input: number, tokens_output: number) => {
-    track("CHAT_INTENT_MATCHED", { modelo: "Llama 3.3 70B" }, undefined, duracion_ms);
-    trackIA({ proceso: "chat", modelo: "Llama 3.3 70B", duracion_ms, tokens_input, tokens_output, exito: true });
+    track("CHAT_INTENT_MATCHED", { modelo: "GPT-OSS 120B" }, undefined, duracion_ms);
+    trackIA({ proceso: "chat", modelo: "GPT-OSS 120B", duracion_ms, tokens_input, tokens_output, exito: true });
   },
 
   chatIntentDesconocido: (texto: string, duracion_ms: number) => {
-    track("CHAT_INTENT_UNKNOWN", { texto: texto.slice(0, 120), modelo: "Llama 3.3 70B" }, undefined, duracion_ms);
-    trackIA({ proceso: "chat", modelo: "Llama 3.3 70B", duracion_ms, exito: false, error: "error_servidor" });
+    track("CHAT_INTENT_UNKNOWN", { texto: texto.slice(0, 120), modelo: "GPT-OSS 120B" }, undefined, duracion_ms);
+    trackIA({ proceso: "chat", modelo: "GPT-OSS 120B", duracion_ms, exito: false, error: "error_servidor" });
   },
 
   // ── Reportes ──

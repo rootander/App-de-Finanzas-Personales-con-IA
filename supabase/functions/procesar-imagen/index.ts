@@ -39,7 +39,7 @@ Deno.serve(async (req) => {
   }
 
   try {
-    console.log('1. Función iniciada (Groq + Llama 4 Vision)')
+    console.log('1. Función iniciada (Groq + Qwen 3.8 27B Vision)')
 
     const body = await req.json()
     const { imagen_base64, mime_type, descripcion_usuario } = body
@@ -153,7 +153,7 @@ Responde ÚNICAMENTE con JSON válido, sin explicaciones, sin markdown:
 
     const imageUrl = `data:${mime_type || 'image/jpeg'};base64,${base64Data}`
 
-    console.log('2. Enviando imagen a Groq (Llama 4 Scout Vision)...')
+    console.log('2. Enviando imagen a Groq (Qwen 3.8 27B Vision)...')
     console.log('Tamaño base64:', base64Data.length, 'chars')
 
     const response = await fetch('https://api.groq.com/openai/v1/chat/completions', {
@@ -163,7 +163,7 @@ Responde ÚNICAMENTE con JSON válido, sin explicaciones, sin markdown:
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'meta-llama/llama-4-scout-17b-16e-instruct',
+        model: 'qwen/qwen3.8-27b',
         messages: [
           {
             role: 'system',
@@ -183,7 +183,7 @@ Responde ÚNICAMENTE con JSON válido, sin explicaciones, sin markdown:
             ]
           }
         ],
-        max_tokens: 600,
+        max_tokens: 1024,
         temperature: 0.05,
         response_format: { type: 'json_object' }
       })

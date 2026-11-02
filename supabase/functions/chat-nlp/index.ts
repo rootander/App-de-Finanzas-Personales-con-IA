@@ -50,7 +50,7 @@ REGLAS PARA RESPONDER:
 EJEMPLO de respuesta completa sobre ahorro:
 "Tu ahorro total es de S/ 500. Te recomiendo destinar al menos el 20% de tus ingresos mensuales a un fondo de emergencia. 💰"`
 
-    // Llamada a la API de Groq usando Llama 3.3 70B
+    // Llamada a la API de Groq usando GPT-OSS 120B
     const groqResponse = await fetch('https://api.groq.com/openai/v1/chat/completions', {
       method: 'POST',
       headers: {
@@ -58,7 +58,7 @@ EJEMPLO de respuesta completa sobre ahorro:
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({
-        model: 'llama-3.3-70b-versatile',
+        model: 'openai/gpt-oss-120b',
         messages: [
           { role: 'system', content: systemPrompt },
           { role: 'user', content: mensaje }
